@@ -1,0 +1,24 @@
+/* Base Styles */
+html {
+    font-size: 16px; /* Default font size for consistent scaling */
+    font-family: 'Poppins', sans-serif; /* Modern and clean Google Font */
+    scroll-behavior: smooth; /* Smooth scrolling for better UX */
+    background-color: #f4f4f9; /* Light background color for a soft look */
+    color: #333; /* Default text color */
+    line-height: 1.6; /* Good readability */
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1rem; /* Base font size, scalable with html settings */
+    background-color: inherit;
+    color: inherit;
+}
+
+/* Additional global settings if needed */
