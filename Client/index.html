@@ -4,414 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profiles</title>
+    <link rel="stylesheet" href="style.css"> <!-- External CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #f8f9fa;
-            padding: 20px 30px;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .profile-list {
-            margin: 20px 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Thinner cards */
-            gap: 20px;
-        }
-
-        .profile-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            text-align: center;
-            transition: transform 0.3s;
-            height: 300px;
-            max-width: 280px; /* Same width for all cards */
-        }
-
-        .profile-card:hover {
-            transform: scale(1.05);
-        }
-
-        .profile-card img {
-            width: 220px; /* Larger images */
-            height: 220px; /* Larger images */
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            margin-top: 10px;
-        }
-
-        .add-profile-card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #007bff;
-            color: white;
-            font-size: 30px;
-            border-radius: 10px;
-            width: 100%; /* Ensure it's the same width as other cards */
-            height: 300px; /* Same height as the other profile cards */
-            cursor: pointer;
-            text-align: center;
-            flex-direction: column;
-            max-width: 280px; /* Same width as the other profile cards */
-        }
-
-        .add-profile-card span {
-            font-size: 50px;
-        }
-
-        .add-profile-card p {
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
-        .profile-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
-        }
-
-        .profile-card .edit-icon, .profile-card .delete-icon {
-            position: absolute;
-            top: 10px;
-            cursor: pointer;
-            display: none;
-        }
-
-        .profile-card .edit-icon {
-            right: 40px;
-            color: #007bff;
-        }
-
-        .profile-card .delete-icon {
-            right: 10px;
-            color: #e74c3c;
-        }
-
-        .profile-card:hover .edit-icon, .profile-card:hover .delete-icon {
-            display: inline-block;
-        }
-
-        #editProfileScreen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #f8f9fa;
-            overflow-y: auto;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        #editProfileScreen.open {
-            display: block;
-        }
-
-        .back-button {
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-
-        .rename-button, .save-button {
-            font-size: 14px;
-            cursor: pointer;
-            background: #007bff;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-            margin-left: 10px;
-        }
-
-        .rename-button:hover, .save-button:hover {
-            background: #0056b3;
-        }
-
-        .separator {
-            border-bottom: 1px solid #dee2e6;
-            margin-bottom: 20px;
-        }
-
-        .profile-picture-preview {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-        }
-
-        .editable-name {
-            border: 2px solid transparent;
-            transition: border 0.3s ease;
-            padding: 5px;
-        }
-
-        .editable-name.editable {
-            border: 2px solid #007bff;
-        }
-
-        .editable-name input {
-            width: 100%;
-            padding: 5px;
-            font-size: 18px;
-            border-radius: 3px;
-            border: 2px solid #ddd;
-        }
-
-        /* Popup style */
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup.open {
-            display: flex;
-        }
-
-        .popup-content {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .popup-content button {
-            margin: 10px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <div id="sideMenu" class="side-menu">
+        <div id="menuToggle" class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+        <div class="menu-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+
     <header>
-        <h1>Profiles</h1>
+        <div class="navbar">
+        <div class="left"><h1>Profiles</h1></div>
+        <div class="right"><a href="https://github.com/Jomlom/Profiles" id="github" target="_blank"><i class="fa fa-github fa-3x" aria-hidden="true"></i></a></div>
+        </div>
     </header>
 
-    <div class="container mt-4">
-        <h2>Saved Profiles</h2>
-        <div id="profileList" class="profile-list">
-            <!-- Profiles will be dynamically added here -->
+    <div>
+        <div class="container mt-4">
+            <h2>Saved Profiles</h2>
+            <div id="profileList" class="profile-list">
+                <!-- Profiles will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Full-Screen Edit Profile Screen -->
+        <div id="editProfileScreen">
+            <button class="btn btn-secondary back-button" onclick="closeEditScreen()">Back</button>
+            <div id="profileNameContainer" class="d-flex align-items-center">
+                <div id="profileNameDisplay" class="profile-name-display">
+                    <span id="profileNameText" class="editable-name">Profile Name</span>
+                </div>
+                <button id="renameButton" class="rename-button" onclick="enableEdit()">Rename Profile</button>
+                <button id="saveButton" class="save-button" onclick="saveNameChanges()" style="display:none;">Save</button>
+            </div>
+            <div class="separator"></div>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editUsername">Username</label>
+                    <input type="text" class="form-control" id="editUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDisplayName">Display Name</label>
+                    <input type="text" class="form-control" id="editDisplayName">
+                </div>
+                <div class="form-group">
+                    <label for="editProfileColour">Profile Colour</label>
+                    <input type="color" class="form-control" id="editProfileColour">
+                </div>
+                <div class="form-group">
+                    <label for="editBio">Bio</label>
+                    <textarea class="form-control" id="editBio"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editProfilePicture">Profile Picture</label>
+                    <input type="file" class="form-control-file" id="editProfilePicture" accept="image/*" onchange="previewImage(event)">
+                    <img id="profilePicturePreview" class="profile-picture-preview" src="" alt="Profile Picture">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="saveProfileChanges()">Save Changes</button>
+            </form>
+        </div>
+        
+        <!-- Delete Confirmation Popup -->
+        <div id="deletePopup" class="popup">
+            <div class="popup-content">
+                <p>Are you sure you want to delete this profile?</p>
+                <button class="btn btn-danger" onclick="deleteProfile()">Yes, Delete</button>
+                <button class="btn btn-secondary" onclick="closePopup()">No, Cancel</button>
+            </div>
         </div>
     </div>
 
-    <!-- Full-Screen Edit Profile Screen -->
-    <div id="editProfileScreen">
-        <button class="btn btn-secondary back-button" onclick="closeEditScreen()">Back</button>
-        <div id="profileNameContainer" class="d-flex align-items-center">
-            <div id="profileNameDisplay" class="profile-name-display">
-                <span id="profileNameText" class="editable-name">Profile Name</span>
-            </div>
-            <button id="renameButton" class="rename-button" onclick="enableEdit()">Rename Profile</button>
-            <button id="saveButton" class="save-button" onclick="saveNameChanges()" style="display:none;">Save</button>
-        </div>
-        <div class="separator"></div>
-        <form id="editProfileForm">
-            <div class="form-group">
-                <label for="editUsername">Username</label>
-                <input type="text" class="form-control" id="editUsername" required>
-            </div>
-            <div class="form-group">
-                <label for="editProfilePicture">Profile Picture</label>
-                <input type="file" class="form-control-file" id="editProfilePicture" accept="image/*" onchange="previewImage(event)">
-                <img id="profilePicturePreview" class="profile-picture-preview" src="" alt="Profile Picture">
-            </div>
-            <button type="button" class="btn btn-primary" onclick="saveProfileChanges()">Save Changes</button>
-        </form>
-    </div>
-
-    <!-- Delete Confirmation Popup -->
-    <div id="deletePopup" class="popup">
-        <div class="popup-content">
-            <p>Are you sure you want to delete this profile?</p>
-            <button class="btn btn-danger" onclick="deleteProfile()">Yes, Delete</button>
-            <button class="btn btn-secondary" onclick="closePopup()">No, Cancel</button>
-        </div>
-    </div>
-
-    <script>
-        const profileList = document.getElementById('profileList');
-        const editProfileScreen = document.getElementById('editProfileScreen');
-        const profileNameText = document.getElementById('profileNameText');
-        const profilePicturePreview = document.getElementById('profilePicturePreview');
-        const renameButton = document.getElementById('renameButton');
-        const saveButton = document.getElementById('saveButton');
-        const editUsernameInput = document.getElementById('editUsername');
-        const editProfilePictureInput = document.getElementById('editProfilePicture');
-        const deletePopup = document.getElementById('deletePopup');
-        const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
-        let editIndex = null;
-        let deleteIndex = null;
-        let isEditingName = false;
-
-        function saveProfilesToLocalStorage() {
-            localStorage.setItem('profiles', JSON.stringify(profiles));
-        }
-
-        function renderProfiles() {
-            profileList.innerHTML = '';
-            profiles.forEach((profile, index) => {
-                const profileCard = document.createElement('div');
-                profileCard.className = 'profile-card';
-
-                // If profile has a picture, show it, else show nothing
-                if (profile.picture) {
-                    const profileImage = document.createElement('img');
-                    profileImage.src = profile.picture;
-                    profileImage.alt = profile.name;
-                    profileCard.appendChild(profileImage);
-                }
-
-                // Show the name only once
-                const profileName = document.createElement('div');
-                profileName.className = 'profile-name';
-                profileName.textContent = profile.name;
-                profileCard.appendChild(profileName);
-
-                const editIcon = document.createElement('span');
-                editIcon.className = 'edit-icon';
-                editIcon.innerHTML = '✏️';
-                editIcon.onclick = () => openEditScreen(index);
-                profileCard.appendChild(editIcon);
-
-                const deleteIcon = document.createElement('span');
-                deleteIcon.className = 'delete-icon';
-                deleteIcon.innerHTML = '❌';
-                deleteIcon.onclick = () => openDeletePopup(index);
-                profileCard.appendChild(deleteIcon);
-
-                profileList.appendChild(profileCard);
-            });
-
-            // Add "Add New" profile at the end
-            const addNewProfileCard = document.createElement('div');
-            addNewProfileCard.className = 'profile-card add-profile-card';
-            addNewProfileCard.onclick = addNewProfile;
-            addNewProfileCard.innerHTML = `<span>+</span><p>Add New</p>`;
-            profileList.appendChild(addNewProfileCard);
-        }
-
-        function openEditScreen(index) {
-            editIndex = index;
-            const profile = profiles[index];
-            editProfileScreen.classList.add('open');
-            editUsernameInput.value = profile.username;
-            profileNameText.textContent = profile.name;
-            profilePicturePreview.src = profile.picture || '';
-            editProfilePictureInput.value = ''; // Reset file input for each profile edit
-        }
-
-        function closeEditScreen() {
-            editProfileScreen.classList.remove('open');
-            resetRenameButton();
-        }
-
-        function enableEdit() {
-            isEditingName = true;
-            profileNameText.innerHTML = `<input type="text" value="${profiles[editIndex].name}" class="form-control">`;
-            saveButton.style.display = 'inline-block';
-            renameButton.style.display = 'none';
-        }
-
-        function saveNameChanges() {
-            const newName = profileNameText.querySelector('input').value;
-            profiles[editIndex].name = newName;
-            saveProfilesToLocalStorage();
-            resetRenameButton();
-            renderProfiles();
-        }
-
-        function resetRenameButton() {
-            isEditingName = false;
-            profileNameText.innerHTML = profiles[editIndex].name;
-            renameButton.style.display = 'inline-block';
-            saveButton.style.display = 'none';
-        }
-
-        function saveProfileChanges() {
-            const username = editUsernameInput.value;
-            const picture = editProfilePictureInput.files[0];
-
-            profiles[editIndex].username = username;
-
-            if (picture) {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    profiles[editIndex].picture = reader.result;
-                    saveProfilesToLocalStorage();
-                    renderProfiles();
-                    closeEditScreen();
-                };
-                reader.readAsDataURL(picture);
-            } else {
-                saveProfilesToLocalStorage();
-                renderProfiles();
-                closeEditScreen();
-            }
-        }
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    profilePicturePreview.src = reader.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function openDeletePopup(index) {
-            deleteIndex = index;
-            deletePopup.classList.add('open');
-        }
-
-        function closePopup() {
-            deletePopup.classList.remove('open');
-        }
-
-        function deleteProfile() {
-            profiles.splice(deleteIndex, 1);
-            saveProfilesToLocalStorage();
-            renderProfiles();
-            closePopup();
-        }
-
-        function addNewProfile() {
-            const newProfile = {
-                name: 'New Profile',
-                username: '',
-                picture: ''
-            };
-            profiles.push(newProfile);
-            saveProfilesToLocalStorage();
-            renderProfiles();
-        }
-
-        renderProfiles();
-    </script>
+    <script src="index.js"></script> <!-- External JS -->
+    <script src="editMenu.js"></script> <!-- External JS -->
+    <script src="profilesList.js"></script> <!-- External JS -->
+    <script src="sideMenu.js"></script> <!-- External JS for side menu -->
 </body>
 </html>

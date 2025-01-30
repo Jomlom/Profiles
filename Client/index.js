@@ -1,67 +1,41 @@
-// Select form and profiles list container
-const profileForm = document.getElementById("profileForm");
-const profilesList = document.getElementById("profilesList");
+const profileList = document.getElementById('profileList');
+const editProfileScreen = document.getElementById('editProfileScreen');
+const profileNameText = document.getElementById('profileNameText');
+const profilePicturePreview = document.getElementById('profilePicturePreview');
+const renameButton = document.getElementById('renameButton');
+const saveButton = document.getElementById('saveButton');
+const editUsernameInput = document.getElementById('editUsername');
+const editProfilePictureInput = document.getElementById('editProfilePicture');
+const deletePopup = document.getElementById('deletePopup');
+let profiles = [];
+let editIndex = null;
+let deleteIndex = null;
+let isEditingName = false;
 
-// Load profiles from localStorage
-const loadProfiles = () => {
-    const profiles = JSON.parse(localStorage.getItem("profiles")) || [];
-    profilesList.innerHTML = profiles.length
-        ? profiles.map(profileToHTML).join("")
-        : "<p>No profiles created yet.</p>";
-};
+function loadProfilesFromLocalStorage() {
+    const storedProfiles = localStorage.getItem('profiles');
+    if (storedProfiles) {
+        profiles = JSON.parse(storedProfiles);
 
-// Convert profile object to HTML for display
-const profileToHTML = ({ name, username, image }) => `
-    <div class="card mb-3">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="${image}" class="card-img" alt="${name}">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">${name}</h5>
-                    <p class="card-text"><strong>Username:</strong> ${username}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-`;
-
-// Handle form submission
-profileForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    // Get form values
-    const name = document.getElementById("profileName").value;
-    const username = document.getElementById("username").value;
-    const profilePicture = document.getElementById("profilePicture").files[0];
-
-    // Convert image file to Base64
-    const reader = new FileReader();
-    reader.onload = function () {
-        const image = reader.result;
-
-        // Create profile object
-        const newProfile = { name, username, image };
-
-        // Save to localStorage
-        const profiles = JSON.parse(localStorage.getItem("profiles")) || [];
-        profiles.push(newProfile);
-        localStorage.setItem("profiles", JSON.stringify(profiles));
-
-        // Reset form and reload profiles
-        profileForm.reset();
-        loadProfiles();
-    };
-
-    if (profilePicture) {
-        reader.readAsDataURL(profilePicture);
+        // Ensure backward compatibility: add default values for new fields in old profiles
+        profiles.forEach(profile => {
+            if (!profile.displayName) {
+                profile.displayName = ''; // default display name
+            }
+            if (!profile.profileColour) {
+                profile.profileColour = '#FFFFFF'; // default profile color
+            }
+            if (!profile.bio) {
+                profile.bio = ''; // default bio
+            }
+            if (!profile.profilePicture) {
+                profile.profilePicture = ''; // renamed from 'picture'
+            }
+        });
     } else {
-        // If no image, use placeholder
-        const placeholderImage = "https://via.placeholder.com/150";
-        reader.onload({ target: { result: placeholderImage } });
+        profiles = [];
     }
-});
+}
 
-// Load profiles on page load
-loadProfiles();
+// Load profiles when the script runs
+loadProfilesFromLocalStorage();

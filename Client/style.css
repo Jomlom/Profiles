@@ -1,24 +1,291 @@
-/* Base Styles */
-html {
-    font-size: 16px; /* Default font size for consistent scaling */
-    font-family: 'Poppins', sans-serif; /* Modern and clean Google Font */
-    scroll-behavior: smooth; /* Smooth scrolling for better UX */
-    background-color: #f4f4f9; /* Light background color for a soft look */
-    color: #333; /* Default text color */
-    line-height: 1.6; /* Good readability */
-}
-
-/* General Reset */
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 20px 30px;
+    border-bottom: 1px solid #dee2e6;
+    margin-left: 30px;
+}
+
+.profile-list {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Thinner cards */
+    gap: 20px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s;
+    height: 300px;
+    max-width: 280px; /* Same width for all cards */
+    /* Dynamic background color */
+    background-color: var(--profile-color, white); /* Using profileColour as a CSS variable */
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+}
+
+.profile-card img {
+    width: 150px; /* Slightly smaller images */
+    height: 150px; /* Slightly smaller images */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.add-profile-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    font-size: 30px;
+    border-radius: 10px;
+    width: 100%; /* Ensure it's the same width as other cards */
+    height: 300px; /* Same height as the other profile cards */
+    cursor: pointer;
+    text-align: center;
+    flex-direction: column;
+    max-width: 280px; /* Same width as the other profile cards */
+}
+
+.add-profile-card span {
+    font-size: 50px;
+}
+
+.add-profile-card p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.profile-name {
+    font-size: 22px;  /* Increased size */
+    font-weight: bold;
+    margin-top: 10px;
+    color: var(--text-color, black);  /* Dynamically applied text color */
+}
+
+.profile-display-name {
+    font-size: 18px;  /* Increased size */
+    margin-top: 5px;
+    color: var(--text-color, black);  /* Dynamically applied text color */
+}
+
+.profile-card .edit-icon, .profile-card .delete-icon {
+    position: absolute;
+    top: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+.profile-card .edit-icon {
+    right: 40px;
+    color: #007bff;
+}
+
+.profile-card .delete-icon {
+    right: 10px;
+    color: #e74c3c;
+}
+
+.profile-card:hover .edit-icon, .profile-card:hover .delete-icon {
+    display: inline-block;
+}
+
+#editProfileScreen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 20px;
+}
+
+#editProfileScreen.open {
+    display: block;
+}
+
+.back-button {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.rename-button, .save-button {
+    font-size: 14px;
+    cursor: pointer;
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.rename-button:hover, .save-button:hover {
+    background: #0056b3;
+}
+
+.separator {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.profile-picture-preview {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.editable-name {
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+    padding: 5px;
+}
+
+.editable-name.editable {
+    border: 2px solid #007bff;
+}
+
+.editable-name input {
+    width: 100%;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 3px;
+    border: 2px solid #ddd;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup.open {
+    display: flex;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-content button {
+    margin: 10px;
 }
 
 body {
-    font-size: 1rem; /* Base font size, scalable with html settings */
-    background-color: inherit;
-    color: inherit;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Additional global settings if needed */
+header {
+    background-color: #f8f9fa;
+    padding: 20px 30px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50px; /* Start with a thin width */
+    background-color: #333;
+    overflow-x: hidden;
+    transition: width 0.3s;
+    z-index: 1000;
+}
+
+.side-menu.expanded {
+    width: 200px; /* Expanded width */
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none; /* Remove the white outline */
+}
+
+.menu-content {
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.side-menu.expanded .menu-content {
+    display: flex;
+}
+
+.menu-content a {
+    color: white;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-content a:hover {
+    background-color: #575757;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.right-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#github:visited, #github {
+    color: black;
+}
